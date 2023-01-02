@@ -1,5 +1,6 @@
 import React from 'react';
 import Shelf from './Shelf';
+import "../App.css"
 
 
 const Shelves = ({books, updateBookShelf}) => {

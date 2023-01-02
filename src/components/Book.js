@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "../App.css"
 
 const Book = ({ book, sendFrom, changeBookShelf }) => {
     // const link = book.imageLinks.thumbnail;

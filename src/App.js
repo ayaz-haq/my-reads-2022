@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Routes,Route, } from "react-router-dom";
 import Header from './components/Header'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
@@ -8,6 +8,8 @@ import Book from './components/Book'
 // import { useDebounce } from 'use-debounce';
 
 import useQuery from './hooks/useQuery'
+import Search from './pages/Search'
+import BookShelf from './pages/BookShelf'
 
 const BooksApp = () => {
 
@@ -111,56 +113,14 @@ const BooksApp = () => {
   
   return (
     <div className="app">
-      <Router>
+      <Routes>
           {/* SEARCH */}
-          <Route excat path="/search" element >
-            <div className="search-books">
-              <div className="search-books-bar">
-                <Link to="/">
-                  <button className="close-search">Close</button>
-                </Link>
-                <div className="search-books-input-wrapper">
-                  
-                  <input type="text" placeholder="Search by title or author" value={query} onChange={(e) => setQuery(e.target.value)} />
-                </div>
-              </div>
-              <div className="search-books-results">
-                <ol className="books-grid">
-                  {  searchBooks.map(b => (
-                    <li key={b.id}>
-                      {/* {testSearch()} */}
-                      {b?
-                      <Book book={b} sendFrom="search" changeBookShelf={updateBookShelf} />
-                      :<></>
-                      }
-
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </div>
-          </Route>
+          <Route excat path="/search" element={<Search updateBookShelf={updateBookShelf} /> } />    
 
           {/* MAIN PAGE */}
-          <Route excat path="/">
-            <div className="list-books">
-            {/* {console.log("SEARCH", searchBooks)} */}
-
-              <Header />
-              <div className="list-books-content">
-                <Shelves books={books} updateBookShelf={updateBookShelf} />
-              </div>
-              <div >
-                <div className='open-search'>
-
-                <Link to="/search">
-                  Add a book
-                </Link>
-                </div>
-              </div>
-            </div>
-          </Route>
-      </Router>
+          <Route excat path="/" element={<BookShelf books={books} updateBookShelf={updateBookShelf}/>}/>
+            
+      </Routes>
     </div>
   )
 
